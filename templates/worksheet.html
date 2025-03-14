@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Worksheet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container worksheet">
+        <header class="worksheet-header">
+            <h1>Math Worksheet - {{ operation.title() }}</h1>
+            <div class="student-info">
+                <div class="info-field">
+                    <label>Name:</label>
+                    <div class="info-line"></div>
+                </div>
+                <div class="info-field">
+                    <label>Date:</label>
+                    <div class="info-line"></div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- All problems - no forced page splits -->
+        <div class="problems-container">
+            <!-- Problems -->
+            {% for i in range(problems|length) %}
+                {% set problem = problems[i] %}
+                
+                {% if i == 0 %}
+                    <!-- First page grid -->
+                    <div class="problems-grid first-page-grid">
+                {% elif i % 20 == 0 %}
+                    </div>
+                    <!-- Page break -->
+                    <div class="page-break"></div>
+                    <div class="subtle-spacer"></div>
+                    <div class="second-page-header">
+                        <h2>Math Worksheet - {{ operation.title() }}</h2>
+                        <p class="continued-note">(Page {{ (i // 20) + 1 }})</p>
+                    </div>
+                    <div class="problems-grid second-page-grid">
+                {% endif %}
+                
+                <div class="problem">
+                    <div class="problem-content">
+                        <div class="expression">
+                            {% if problem.op == '÷' %}
+                                <div class="division-problem">
+                                    <table class="long-division-table">
+                                        <tr>
+                                            <td class="divisor-cell">{{ problem.b }}</td>
+                                            <td class="dividend-cell">{{ problem.a }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <div class="vertical-problem">
+                                    <div class="top-number">{{ problem.a }}</div>
+                                    <div class="operation-line">
+                                        <span class="op">{{ problem.op }}</span>
+                                        <span class="bottom-number">{{ problem.b }}</span>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                {% if loop.last %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        
+        <div class="actions">
+            <button onclick="window.print()" class="print-btn">Print Worksheet</button>
+            <a href="/" class="back-btn">Create New Worksheet</a>
+        </div>
+    </div>
+</body>
+</html>

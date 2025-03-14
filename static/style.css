@@ -1,0 +1,349 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+select, input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.generate-btn, .print-btn, .back-btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+.generate-btn:hover, .print-btn:hover {
+    background-color: #2980b9;
+}
+
+.back-btn {
+    background-color: #95a5a6;
+    margin-left: 10px;
+}
+
+.back-btn:hover {
+    background-color: #7f8c8d;
+}
+
+.problems-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+/* Hide page break in normal view */
+.page-break {
+    display: none;
+}
+
+/* Add spacing between first and second page grids in normal view */
+.second-page-grid {
+    margin-top: 50px;
+}
+
+.problem {
+    border: 1px solid #eee;
+    padding: 20px; /* Increased from 15px */
+    border-radius: 4px;
+}
+
+.problem-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 150px; /* Limit width to control answer line width */
+    margin: 0 auto;
+}
+
+.expression {
+    font-size: 24px;
+    margin-bottom: 15px; /* Increased from 10px */
+    width: 100%;
+}
+
+.vertical-problem {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    max-width: 100px; /* Control the maximum width */
+    margin-left: auto; /* Right align the problem */
+}
+
+.top-number {
+    text-align: right;
+    font-weight: bold;
+    margin-bottom: 6px; /* Slightly increased */
+}
+
+.operation-line {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-bottom: 2px solid #333;
+    width: 100%;
+    margin-bottom: 15px; /* Increased from 10px */
+}
+
+.op {
+    margin-right: 5px;
+}
+
+.bottom-number {
+    text-align: right;
+    font-weight: bold;
+}
+
+/* Division problem styles */
+.division-problem {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    max-width: 120px;
+    margin: 0 auto;
+}
+
+.long-division-table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.divisor-cell {
+    text-align: right;
+    padding-right: 5px;
+    border-right: 2px solid #333;
+    vertical-align: middle;
+}
+
+.dividend-cell {
+    text-align: center;
+    padding: 5px 8px;
+    min-width: 40px;
+    border-top: 2px solid #333;
+}
+
+.answer-line {
+    height: 2px;
+    background-color: #333;
+    margin-top: 15px;
+    width: 80px; /* Fixed width to match problem width better */
+    margin-left: auto; /* Right align to match the problem */
+}
+
+.actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Worksheet header styles */
+.worksheet-header {
+    margin-bottom: 30px;
+}
+
+.student-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.info-field {
+    flex: 1;
+    margin: 0 15px;
+}
+
+.info-field label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.info-line {
+    border-bottom: 1px solid #333;
+    margin-top: 5px;
+    height: 20px;
+}
+
+@media print {
+    .actions {
+        display: none;
+    }
+    
+    body {
+        background-color: white;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        box-shadow: none;
+        margin: 0;
+        padding: 0.5in;
+        max-width: 100%;
+    }
+    
+    /* Ensure header stays with content */
+    .worksheet-header {
+        page-break-after: avoid;
+    }
+    
+    .second-page-header {
+        margin-top: 0.3in;
+        text-align: center;
+        padding-top: 0.15in;
+    }
+    
+    .continued-note {
+        font-style: italic;
+        margin-top: 5px;
+        color: #555;
+    }
+    
+    h1, h2 {
+        margin-top: 0;
+        padding-top: 0;
+    }
+    
+    /* Shared grid properties */
+    .problems-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        padding: 0 0.3in;
+    }
+    
+    /* First page grid specific */
+    /* Container for all problems */
+    .problems-container {
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .first-page-grid {
+        margin-top: 0.3in;
+        page-break-after: auto; /* Changed from always to auto */
+        margin-bottom: 0; /* Ensure no extra space at bottom */
+        padding-bottom: 0; /* Eliminate padding at bottom */
+    }
+    
+    /* Second page grid specific */
+    .second-page-grid {
+        margin-top: 0.25in;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    /* Create subtle spacing at the top of continuation pages */
+    .subtle-spacer {
+        height: 0.15in;
+        line-height: 0;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Second page header spacing */
+    .second-page-header {
+        margin-bottom: 0.3in;
+    }
+    
+    .problem {
+        page-break-inside: avoid;
+        border: none;
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+    
+    /* Only apply page breaks when needed */
+    .page-break {
+        display: none; /* Hidden by default */
+    }
+    
+    @media print {
+        .page-break {
+            display: block;
+            page-break-before: always;
+            margin: 0;
+            padding: 0;
+            height: 0;
+            clear: both;
+        }
+    }
+    
+    /* Control problem layout */
+    .problem-content {
+        max-width: 120px;
+    }
+    
+    /* Adjust font sizes for print */
+    .expression {
+        font-size: 18px;
+    }
+    
+    /* Ensure student info fields print properly */
+    .student-info {
+        margin-bottom: 0.3in;
+    }
+    
+    /* Define page formatting */
+    @page {
+        margin: 0.5in;
+        @bottom-right {
+            content: counter(page);
+        }
+    }
+    
+    /* First page settings */
+    @page :first {
+        margin-top: 0.5in;
+    }
+    
+    /* Second and subsequent pages */
+    @page :not(:first) {
+        margin-top: 0.4in;
+    }
+}
