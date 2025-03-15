@@ -2,6 +2,8 @@
 
 A web-based elementary math worksheet generator that creates customized practice problems for addition, subtraction, multiplication, and division, optimized for classroom use.
 
+**Live Demo**: [https://mathsheets.onrender.com](https://mathsheets.onrender.com)
+
 ## Features
 
 - **Specialized Problem Types**: Choose from 19 different operation subtypes grouped by educational concepts
@@ -37,6 +39,19 @@ A web-based elementary math worksheet generator that creates customized practice
    ```
 
 4. Open your browser and navigate to http://127.0.0.1:5000/
+
+## Deployment
+
+This application is currently deployed on Render. For your own deployment:
+
+1. Fork or clone this repository
+2. Connect your GitHub repository to Render
+3. Create a new Web Service with these settings:
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn app:app`
+   - **Environment Variable**: Set `PORT` to match your service provider's requirements
+
+Note: On free tier Render services, the application may take 30-60 seconds to "wake up" after periods of inactivity.
 
 ## Future Enhancements
 

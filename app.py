@@ -1,5 +1,13 @@
 from flask import Flask, render_template, request
 import random, os
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s: %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
 
 app = Flask(__name__)
 # Tell Flask to trust the X-Forwarded-Proto header set by Render's load balancer
@@ -12,6 +20,7 @@ def index():
 
     Displays all available operation types and problem count options.
     """
+    logging.info("Rendering index page")
     return render_template('index.html')
 
 @app.route('/generate', methods=['POST'])
@@ -27,7 +36,9 @@ def generate():
     """
     operation_type = request.form.get('operation_type', 'addition_1digit')
     num_problems = int(request.form.get('num_problems', 20))
-
+    
+    logging.info(f"Generating worksheet: {operation_type}, {num_problems} problems")
+    
     # Get the base operation from the operation type
     operation = operation_type.split('_')[0]
 
@@ -297,4 +308,5 @@ def generate_problems(operation, num_problems, max_digits):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
+    logging.info(f"Starting application on port {port}")
     app.run(host='0.0.0.0', port=port)
