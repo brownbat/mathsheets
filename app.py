@@ -2,6 +2,8 @@ from flask import Flask, render_template, request
 import random, os
 
 app = Flask(__name__)
+# Tell Flask to trust the X-Forwarded-Proto header set by Render's load balancer
+app.config['PREFERRED_URL_SCHEME'] = 'https'
 
 @app.route('/')
 def index():
